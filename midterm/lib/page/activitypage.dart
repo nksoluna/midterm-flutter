@@ -70,36 +70,38 @@ Widget showContent(List<Activity> activities) {
         ),
         SizedBox(height: 24),
         Expanded(
-          child: ListView.builder(
-              padding: EdgeInsets.all(8),
-              itemCount: activities.length,
-              itemBuilder: (BuildContext context, int index) {
-                final activity = activities[index];
-                return Card(
-                  color: Colors.white,
-                  child: ExpansionTile(
-                    tilePadding:
-                        EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                    title: Text(
-                      activity.title,
-                      maxLines: 2,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.greenAccent.shade700),
-                    ),
-                    subtitle: Text(activity.groups),
-                    trailing: Text(
-                      activity.lasttime,
-                      style: TextStyle(
-                          color: Colors.greenAccent.shade700,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
-                  ),
-                );
-              }),
-        ),
+            child: ListView.builder(
+                padding: EdgeInsets.all(8),
+                itemCount: activities.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final activity = activities[index];
+                  if (activity.groups == activities[index].groups)
+                    return Card(
+                      color: Colors.white,
+                      child: ExpansionTile(
+                        tilePadding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                        title: Text(
+                          activity.title,
+                          maxLines: 2,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.greenAccent.shade700),
+                        ),
+                        subtitle: Text(activity.groups),
+                        trailing: Text(
+                          activity.lasttime,
+                          style: TextStyle(
+                              color: Colors.greenAccent.shade700,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ),
+                    );
+                  else
+                    return SizedBox();
+                })),
       ],
     );
   }
