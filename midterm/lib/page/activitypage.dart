@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midterm/model/activity.dart';
 import 'package:midterm/page/Activitydialog.dart';
-
+import 'package:reorderables/reorderables.dart';
 import 'package:midterm/page/boxes.dart';
 
 Widget buildContent(List<Activity> activities) {
@@ -26,13 +26,19 @@ Widget buildContent(List<Activity> activities) {
         ),
         SizedBox(height: 24),
         Expanded(
-          child: ListView.builder(
+          child: ReorderableListView.builder(
             padding: EdgeInsets.all(8),
             itemCount: activities.length,
             itemBuilder: (BuildContext context, int index) {
               final activity = activities[index];
-
               return buildActivity(context, activity);
+            },
+            onReorder: (int oldIndex, int newIndex) {
+              if (newIndex > oldIndex) {
+                newIndex -= 1;
+              }
+              final Activity act = activities.removeAt(oldIndex);
+              activities.insert(newIndex, act);
             },
           ),
         ),
@@ -45,9 +51,15 @@ Widget buildActivity(
   BuildContext context,
   Activity activity,
 ) {
-  var lasttime = 'Date : ' + activity.lasttime;
+  var lasttimelist = activity.lasttime.split(' ');
+  var day = int.parse(lasttimelist[0]);
+  var month = lasttimelist[1].toString();
+  var year = int.parse(lasttimelist[2]);
+  var lasttime =
+      'Date : ' + day.toString() + ' ' + month + ' ' + year.toString();
 
   return Card(
+    key: ValueKey(activity.title),
     color: Colors.white,
     child: ExpansionTile(
       tilePadding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
