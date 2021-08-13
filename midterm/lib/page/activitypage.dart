@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:midterm/model/activity.dart';
 import 'package:midterm/page/Activitydialog.dart';
