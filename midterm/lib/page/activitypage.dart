@@ -3,6 +3,7 @@ import 'package:midterm/model/activity.dart';
 import 'package:midterm/page/Activitydialog.dart';
 
 import 'package:midterm/page/boxes.dart';
+import 'package:midterm/page/thirdpage.dart';
 
 Widget buildContent(List<Activity> activities) {
   if (activities.isEmpty) {
@@ -41,6 +42,63 @@ Widget buildContent(List<Activity> activities) {
               activities.insert(newIndex, act);
             },
           ),
+        ),
+      ],
+    );
+  }
+}
+
+Widget showContent(List<Activity> activities) {
+  if (activities.isEmpty) {
+    return Center(
+      child: Text(
+        'No Data!',
+        style: TextStyle(fontSize: 24),
+      ),
+    );
+  } else {
+    return Column(
+      children: [
+        SizedBox(height: 24),
+        Text(
+          'HISTORY OF ACTIVITIES',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.greenAccent.shade700,
+          ),
+        ),
+        SizedBox(height: 24),
+        Expanded(
+          child: ListView.builder(
+              padding: EdgeInsets.all(8),
+              itemCount: activities.length,
+              itemBuilder: (BuildContext context, int index) {
+                final activity = activities[index];
+                return Card(
+                  color: Colors.white,
+                  child: ExpansionTile(
+                    tilePadding:
+                        EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                    title: Text(
+                      activity.title,
+                      maxLines: 2,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.greenAccent.shade700),
+                    ),
+                    subtitle: Text(activity.groups),
+                    trailing: Text(
+                      activity.lasttime,
+                      style: TextStyle(
+                          color: Colors.greenAccent.shade700,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                  ),
+                );
+              }),
         ),
       ],
     );
@@ -90,6 +148,17 @@ Widget buildActivity(
 
 Widget buildButtons(BuildContext context, Activity activity) => Row(
       children: [
+        Expanded(
+          child: TextButton.icon(
+            label: Text('About'),
+            icon: Icon(Icons.business),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => Thirdpage(),
+              ),
+            ),
+          ),
+        ),
         Expanded(
           child: TextButton.icon(
             label: Text('Edit'),
