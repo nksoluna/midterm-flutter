@@ -6,7 +6,6 @@ import 'package:midterm/page/activitypage.dart';
 import 'package:midterm/page/boxes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
-import 'package:reorderables/reorderables.dart';
 
 class Firstpage extends StatefulWidget {
   @override

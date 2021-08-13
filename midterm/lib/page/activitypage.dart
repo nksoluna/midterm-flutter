@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midterm/model/activity.dart';
 import 'package:midterm/page/Activitydialog.dart';
-import 'package:reorderables/reorderables.dart';
+
 import 'package:midterm/page/boxes.dart';
 
 Widget buildContent(List<Activity> activities) {
@@ -55,8 +55,13 @@ Widget buildActivity(
   var day = int.parse(lasttimelist[0]);
   var month = lasttimelist[1].toString();
   var year = int.parse(lasttimelist[2]);
-  var lasttime =
-      'Date : ' + day.toString() + ' ' + month + ' ' + year.toString();
+  var lasttime = 'Date : ' +
+      day.toString() +
+      ' ' +
+      month +
+      ' ' +
+      year.toString() +
+      '          ';
 
   return Card(
     key: ValueKey(activity.title),
