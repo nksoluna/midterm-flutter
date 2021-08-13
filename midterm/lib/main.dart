@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:midterm/model/activity.dart';
 import 'package:midterm/page/firstpage.dart';
-import 'employees.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-Future main() async  {
-  WidgetsFlutterBinding.ensureInitialized() ;
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-await Hive.initFlutter() ;
+  await Hive.initFlutter();
 
-Hive.registerAdapter(EmployeeAdapter());
-await Hive.openBox<Employee>('Employee') ;
+  Hive.registerAdapter(ActivityAdapter());
+  await Hive.openBox<Activity>('Activity');
 
   runApp(MyApp());
 }
@@ -29,4 +29,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
