@@ -1,7 +1,8 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:midterm/model/activity.dart';
 import 'package:midterm/page/Activitydialog.dart';
-import 'firstpage.dart';
 import 'package:midterm/page/boxes.dart';
 import 'package:midterm/page/thirdpage.dart';
 
@@ -16,7 +17,7 @@ Widget buildContent(List<Activity> activities) {
   } else {
     return Column(
       children: [
-        buildFilter(context),
+        // buildFilter(context),
         SizedBox(height: 24),
         Text(
           'All Activities',
