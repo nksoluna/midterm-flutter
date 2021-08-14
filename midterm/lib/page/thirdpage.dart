@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:midterm/model/activity.dart';
-import 'package:midterm/page/activitypage.dart';
 import 'package:midterm/page/boxes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
@@ -11,16 +10,100 @@ class Thirdpage extends StatefulWidget {
 }
 
 class _ThirdpageState extends State<Thirdpage> {
+  String groupfilter = 'หมวดหมู่';
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text("ABOUT"),
         ),
         body: ValueListenableBuilder<Box<Activity>>(
-            valueListenable: Boxes.getActivity().listenable(),
-            builder: (context, box, _) {
-              final activities = box.values.toList().cast<Activity>();
+          valueListenable: Boxes.getActivity().listenable(),
+          builder: (context, box, _) {
+            final activities = box.values.toList().cast<Activity>();
+            if (groupfilter == 'งานบ้าน') {
+              final homework = activities
+                  .where((element) => element.groups == 'งานบ้าน')
+                  .toList();
+              return showContent(homework);
+            }
+            if (groupfilter == 'ทำงาน') {
+              final worker = activities
+                  .where((element) => element.groups == 'ทำงาน')
+                  .toList();
+              return showContent(worker);
+            }
+            if (groupfilter == 'งานอดิเรก') {
+              final hobbies = activities
+                  .where((element) => element.groups == 'งานอดิเรก')
+                  .toList();
+              return showContent(hobbies);
+            }
+            if (groupfilter == 'งานซ่อม') {
+              final fixed = activities
+                  .where((element) => element.groups == 'งานซ่อม')
+                  .toList();
+              return showContent(fixed);
+            } else {
               return showContent(activities);
-            }));
+            }
+          },
+        ));
+  }
+
+  Widget showContent(List<Activity> activities) {
+    if (activities.isEmpty) {
+      return Center(
+        child: Text(
+          'No Data!',
+          style: TextStyle(fontSize: 24),
+        ),
+      );
+    } else {
+      return Column(
+        children: [
+          SizedBox(height: 24),
+          Text(
+            'HISTORY OF ACTIVITIES',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.greenAccent.shade700,
+            ),
+          ),
+          SizedBox(height: 24),
+          Expanded(
+              child: ListView.builder(
+                  padding: EdgeInsets.all(8),
+                  itemCount: activities.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final activity = activities[index];
+                    return Card(
+                      color: Colors.white,
+                      child: ExpansionTile(
+                        tilePadding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                        title: Text(
+                          activity.title,
+                          maxLines: 2,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.greenAccent.shade700),
+                        ),
+                        subtitle: Text(activity.groups),
+                        trailing: Text(
+                          activity.lasttime,
+                          style: TextStyle(
+                              color: Colors.greenAccent.shade700,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ),
+                    );
+                  })),
+        ],
+      );
+    }
   }
 }

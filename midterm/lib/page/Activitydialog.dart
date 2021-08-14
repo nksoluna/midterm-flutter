@@ -90,21 +90,21 @@ class _ActivityDialogState extends State<ActivityDialog> {
         controller: groupsController,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          hintText: 'Enter Groups of activity',
+          hintText: 'งานบ้าน/ทำงาน/อดิเรก/ซ่อม',
         ),
         validator: (groups) => groups != null && groups.isEmpty
-            ? 'Enter a group of Activity'
+            ? 'งานบ้าน/ทำงาน/อดิเรก/ซ่อม เท่านั้น'
             : null,
       );
 
   Widget buildtimes() => TextFormField(
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          hintText: 'Enter time you did it',
+          hintText: 'วันที่ที่ทำงาน',
         ),
         keyboardType: TextInputType.number,
         validator: (lasttime) =>
-            lasttime != null && lasttime.isEmpty ? 'Important' : null,
+            lasttime != null && lasttime.isEmpty ? 'ระบุเป็น dd mm yy' : null,
         controller: timeController,
       );
 

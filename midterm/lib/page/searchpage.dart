@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:midterm/model/activity.dart';
 import 'package:midterm/page/activitypage.dart';
 
@@ -25,7 +25,9 @@ class _SearchpageState extends State<Searchpage> {
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showSearch(context: context, delegate: Search());
+            },
             icon: Icon(Icons.search),
           )
         ],
@@ -42,3 +44,49 @@ class _SearchpageState extends State<Searchpage> {
     );
   }
 }
+
+class Search extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(Icons.close),
+        onPressed: () {
+          query = "";
+        },
+      ),
+    ];
+  }
+  
+@override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  String selectedResult = "";
+
+@override
+  Widget buildResults(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(selectedResult),
+      ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    Activity acts ;
+    query.isEmpty ?
+    
+
+  }
+
+  
+}
+*/
