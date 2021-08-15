@@ -102,7 +102,6 @@ class _ActivityDialogState extends State<ActivityDialog> {
           border: OutlineInputBorder(),
           hintText: 'วันที่ที่ทำงาน',
         ),
-        keyboardType: TextInputType.number,
         validator: (lasttime) =>
             lasttime != null && lasttime.isEmpty ? 'ระบุเป็น dd mm yy' : null,
         controller: timeController,

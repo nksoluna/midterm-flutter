@@ -13,7 +13,8 @@ class Firstpage extends StatefulWidget {
 }
 
 class _FirstpageState extends State<Firstpage> {
-  String groupfilter = 'หมวดหมู่';
+  String monthfilter = 'เดือน';
+
   @override
   void dispose() {
     Hive.close();
@@ -26,41 +27,87 @@ class _FirstpageState extends State<Firstpage> {
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text("FIRSTPAGE"),
+        actions: [],
         backgroundColor: Colors.greenAccent.shade700,
       ),
       body: ValueListenableBuilder<Box<Activity>>(
-        valueListenable: Boxes.getActivity().listenable(),
-        builder: (context, box, _) {
-          final activities = box.values.toList().cast<Activity>();
-
-          if (groupfilter == 'งานบ้าน') {
-            final homework = activities
-                .where((element) => element.groups == 'งานบ้าน')
-                .toList();
-            return buildContent(homework);
-          }
-          if (groupfilter == 'ทำงาน') {
-            final worker = activities
-                .where((element) => element.groups == 'ทำงาน')
-                .toList();
-            return buildContent(worker);
-          }
-          if (groupfilter == 'งานอดิเรก') {
-            final hobbies = activities
-                .where((element) => element.groups == 'งานอดิเรก')
-                .toList();
-            return buildContent(hobbies);
-          }
-          if (groupfilter == 'งานซ่อม') {
-            final fixed = activities
-                .where((element) => element.groups == 'งานซ่อม')
-                .toList();
-            return buildContent(fixed);
-          } else {
+          valueListenable: Boxes.getActivity().listenable(),
+          builder: (context, box, _) {
+            final activities = box.values.toList().cast<Activity>();
+            if (monthfilter == 'ม.ค.') {
+              final jan = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'ม.ค.')
+                  .toList();
+              return buildContent(jan);
+            }
+            if (monthfilter == 'ก.พ.') {
+              final feb = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'ก.พ.')
+                  .toList();
+              return buildContent(feb);
+            }
+            if (monthfilter == 'มี.ค.') {
+              final mar = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'มี.ค.')
+                  .toList();
+              return buildContent(mar);
+            }
+            if (monthfilter == 'เม.ษ.') {
+              final apr = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'เม.ษ.')
+                  .toList();
+              return buildContent(apr);
+            }
+            if (monthfilter == 'พ.ค.') {
+              final may = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'พ.ค.')
+                  .toList();
+              return buildContent(may);
+            }
+            if (monthfilter == 'มิ.ย.') {
+              final jun = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'มิ.ย.')
+                  .toList();
+              return buildContent(jun);
+            }
+            if (monthfilter == 'ก.ค.') {
+              final jul = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'ก.ค.')
+                  .toList();
+              return buildContent(jul);
+            }
+            if (monthfilter == 'ส.ค.') {
+              final aug = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'ส.ค.')
+                  .toList();
+              return buildContent(aug);
+            }
+            if (monthfilter == 'ก.ย.') {
+              final sep = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'ก.ย.')
+                  .toList();
+              return buildContent(sep);
+            }
+            if (monthfilter == 'ต.ค.') {
+              final oct = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'ต.ค.')
+                  .toList();
+              return buildContent(oct);
+            }
+            if (monthfilter == 'พ.ย.') {
+              final nov = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'พ.ย.')
+                  .toList();
+              return buildContent(nov);
+            }
+            if (monthfilter == 'ธ.ค.') {
+              final dec = activities
+                  .where((element) => element.lasttime.split(' ')[1] == 'ธ.ค.')
+                  .toList();
+              return buildContent(dec);
+            }
             return buildContent(activities);
-          }
-        },
-      ),
+          }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => showDialog(
@@ -73,7 +120,7 @@ class _FirstpageState extends State<Firstpage> {
   }
 
   Widget buildFilter(BuildContext context) => DropdownButton<String>(
-        value: groupfilter,
+        value: monthfilter,
         elevation: 16,
         style: const TextStyle(color: Colors.greenAccent),
         underline: Container(
@@ -82,11 +129,24 @@ class _FirstpageState extends State<Firstpage> {
         ),
         onChanged: (String newValue) {
           setState(() {
-            groupfilter = newValue;
+            monthfilter = newValue;
           });
         },
-        items: <String>['หมวดหมู่', 'งานบ้าน', 'ทำงาน', 'งานอดิเรก', 'งานซ่อม']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: <String>[
+          'เดือน',
+          'ม.ค.',
+          'ก.พ.',
+          'มี.ค.',
+          'เม.ษ.',
+          'พ.ค.',
+          'มิ.ย.',
+          'ก.ค.',
+          'ส.ค.',
+          'ก.ย.',
+          'ต.ค.',
+          'พ.ย.',
+          'ธ.ค.'
+        ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),

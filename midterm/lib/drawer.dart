@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:midterm/page/firstpage.dart';
+import 'package:midterm/page/searchpage.dart';
 
 import 'package:midterm/page/thirdpage.dart';
 
@@ -90,7 +91,7 @@ void selectedpage(BuildContext context, int index) {
   switch (index) {
     case (0):
       Navigator.push(
-          context, new MaterialPageRoute(builder: (context) => Thirdpage()));
+          context, new MaterialPageRoute(builder: (context) => Searchpage()));
       break;
 
     case (1):
